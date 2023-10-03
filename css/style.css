@@ -33,4 +33,10 @@ nav {
     margin-right: auto;
     margin-left: auto;
 }
+#modal-item-datails{
+    background-color: camel-gray;
+    color: black;
+    border-radius: 20px;
+    
+}
 

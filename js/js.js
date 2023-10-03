@@ -6,7 +6,7 @@ $(document).ready(function(){
     }).done(function (resp) {
         var listaItems = resp.results;
         listaItems.forEach(item => {
-            var template = `<div> ${item.name} <div>`;
+            var template = `<div class="item" itemId="/*aqui tengo que averiguar como pasarle el id de los items para que al pulsar en cada uno salga el modal*/"> ${item.name} <div>`;
             $('#lista-nomItems').append(template);
         });
     });
@@ -18,7 +18,7 @@ $(document).ready(function(){
             type: 'GET' 
 
         }).done(function (resp) {
-            $('#modal-item').html(resp.name);
+            $('#modal-itemnom').html(resp.name);
 
             $('#modal-item-datails').show();
         });
