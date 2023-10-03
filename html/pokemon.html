@@ -7,10 +7,27 @@
     <title>Characters</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style type="text/css">
+        @font-face {
+            font-family: fontpixel;
+            src: url(../fonts/dogicapixel.ttf);
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: fontpixel;
+
+        }
+
+        nav {
+            background-color: #5E5EDD;
+        }
+
         body {
-            background-color: rgb(79, 78, 78);
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: #5252A0;
             margin-right: 0;
         }
 
@@ -37,51 +54,9 @@
         }
 
         .btn:hover {
-            background: gray;
+            background: rgb(255, 255, 255);
             box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
 
-        }
-
-        #modalContent {
-            position: absolute;
-            top: 10%;
-            left: 39%;
-            margin: -2% 0px 0px -150px;
-            width: 700px;
-            color: #888888;
-            line-height: 22px;
-            padding: 20px;
-            border-radius: 5px;
-            background: #342f2f;
-            border: 1px solid #f7be68;
-            box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
-        }
-
-        #modal {
-            position: fixed;
-            top: 0px;
-            left: 0px;
-            z-index: 5;
-            float: left;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            display: none;
-        }
-
-        #modal>a {
-            position: fixed;
-            top: 0px;
-            left: 0px;
-            z-index: 1;
-            float: left;
-            width: 100%;
-            height: 100%;
-        }
-
-        :target {
-            display: block !important;
-            opacity: 1 !important;
         }
 
         #modalContent>a {
@@ -104,12 +79,6 @@
             color: white;
         }
 
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            font-family: "Imprima", sans-serif;
-        }
 
         .container {
             width: 350px;
@@ -156,13 +125,6 @@
             margin: 20px 0 40px 0;
         }
 
-        .hp span,
-        .types span {
-            font-size: 12px;
-            letter-spacing: 0.4px;
-            font-weight: 600;
-        }
-
         .types span {
             padding: 5px 20px;
             border-radius: 20px;
@@ -195,44 +157,43 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark">
         <div class="container-fluid">
-            <a class="logo" href="javascript:void(0)">
-                <img id="imagen"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Star_Wars_Logo..png/640px-Star_Wars_Logo.png"
-                    alt="Star Wars Logo">
-            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="mynavbar">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Personajes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Películas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Naves</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Planetas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Vehículos</a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="text" placeholder="Search">
-                    <button class="btn btn-warning " type="button">Search</button>
-                </form>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Especies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pokemón</a>
+                </li>
+            </ul>
+
+            <div style="width: 20%; margin-left: 60px;">
+                <a class="logo" href="#">
+                    <img id="imagen"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png"
+                        alt="Pokemon Logo">
+                </a>
             </div>
+
+            <form class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="Buscar pokemón">
+                <button class="btn btn-warning" style="border-radius: 10px; color:#5252A0;" type="button"><i
+                        class="bi bi-search"></i></button>
+            </form>
+
         </div>
     </nav>
 
     <main>
-        <div class="row row-cols-1 row-cols-md-5 g-4" id="row1" style="padding: 50px;">
+        <div class="row row-cols-1 row-cols-md-6 g-4" id="row1" style="padding: 50px;">
             <div class="col">
                 <a href="#modal" title="Foto de Darth Maul" class="btn"><img
                         src="https://starwars-visualguide.com/assets/img/characters/44.jpg" class="card-img-top"
@@ -250,38 +211,36 @@
         </div>
 
         <div id="modal">
-            <div id="modalContent">
-                <a href="#cerrar">X</a>
-                <div class="container">
-                    <div id="card"
-                        style="background: radial-gradient(circle at 50% 0%, rgb(167, 255, 5) 36%, rgb(255, 255, 255) 36%);">
-                        <p class="hp">
-                            <span>HP</span>
-                            95
-                        </p>
-                        <img
-                            src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/6420b-pikachu-sentado-png.png?resize=800%2C800&amp;ssl=1">
-                        <h2 class="poke-name">Pikachu</h2>
-                        <div class="types">
-                            <span style="background-color: rgb(205, 253, 61);">Electrico</span>
+            <div class="container">
+                <div id="card"
+                    style="background: radial-gradient(circle at 50% 0%, rgb(167, 255, 5) 36%, rgb(255, 255, 255) 36%);">
+                    <p class="hp">
+                        <span>HP</span>
+                        95
+                    </p>
+                    <img
+                        src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/6420b-pikachu-sentado-png.png?resize=800%2C800&amp;ssl=1">
+                    <h2 class="poke-name">Pikachu</h2>
+                    <div class="types">
+                        <span style="background-color: rgb(205, 253, 61);">Electrico</span>
+                    </div>
+                    <div class="stats">
+                        <div>
+                            <h3>70</h3>
+                            <p>Attack</p>
                         </div>
-                        <div class="stats">
-                            <div>
-                                <h3>70</h3>
-                                <p>Attack</p>
-                            </div>
-                            <div>
-                                <h3>73</h3>
-                                <p>Defense</p>
-                            </div>
-                            <div>
-                                <h3>60</h3>
-                                <p>Speed</p>
-                            </div>
+                        <div>
+                            <h3>73</h3>
+                            <p>Defense</p>
+                        </div>
+                        <div>
+                            <h3>60</h3>
+                            <p>Speed</p>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </main>
 
@@ -290,7 +249,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script text="text/javascript" src="index.js"></script>
+    <script text="text/javascript" src="../js/pokemon.js"></script>
 
 </body>
 
