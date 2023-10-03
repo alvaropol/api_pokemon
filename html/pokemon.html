@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style type="text/css">
+        body {
+            background-color: rgb(79, 78, 78);
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin-right: 0;
+        }
+
+        .logo {
+            width: 15%;
+            margin-left: 30px;
+        }
+
+        #imagen {
+            width: 50%;
+            padding-left: 20px;
+        }
+
+        .btn {
+            position: relative;
+            font-size: 1.2em;
+            font-weight: 300;
+            color: #fff;
+            text-shadow: none;
+            border-radius: 0px;
+            background: rgb(205, 205, 66);
+            box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: gray;
+            box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
+
+        }
+
+        #modalContent {
+            position: absolute;
+            top: 10%;
+            left: 39%;
+            margin: -2% 0px 0px -150px;
+            width: 700px;
+            color: #888888;
+            line-height: 22px;
+            padding: 20px;
+            border-radius: 5px;
+            background: #342f2f;
+            border: 1px solid #f7be68;
+            box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
+        }
+
+        #modal {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            z-index: 5;
+            float: left;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        #modal>a {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+            float: left;
+            width: 100%;
+            height: 100%;
+        }
+
+        :target {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        #modalContent>a {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            color: #fff;
+            border-radius: 2px;
+            background: #f7be68;
+            padding: 10px;
+            font-size: 30px;
+            text-decoration: none;
+        }
+
+        h3 {
+            color: rgb(205, 205, 66);
+        }
+
+        h4 {
+            color: white;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Imprima", sans-serif;
+        }
+
+        .container {
+            width: 350px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        }
+
+        #card {
+            position: relative;
+            width: 100%;
+            padding: 30px 20px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+        }
+
+        #card img {
+            display: block;
+            width: 180px;
+            max-height: 200px;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .hp {
+            width: 80px;
+            background-color: #ffffff;
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 30px;
+            margin-left: auto;
+            font-weight: 400;
+        }
+
+        .poke-name {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .types {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0 40px 0;
+        }
+
+        .hp span,
+        .types span {
+            font-size: 12px;
+            letter-spacing: 0.4px;
+            font-weight: 600;
+        }
+
+        .types span {
+            padding: 5px 20px;
+            border-radius: 20px;
+            color: #ffffff;
+        }
+
+        .stats {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .stats p {
+            color: #404060;
+        }
+
+        #btn {
+            display: block;
+            padding: 15px 60px;
+            font-size: 18px;
+            background-color: #101010;
+            color: #ffffff;
+            position: relative;
+            margin: 30px auto;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="logo" href="javascript:void(0)">
+                <img id="imagen"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Star_Wars_Logo..png/640px-Star_Wars_Logo.png"
+                    alt="Star Wars Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Personajes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Películas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Naves</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Planetas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Vehículos</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="text" placeholder="Search">
+                    <button class="btn btn-warning " type="button">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="row row-cols-1 row-cols-md-5 g-4" id="row1" style="padding: 50px;">
+            <div class="col">
+                <a href="#modal" title="Foto de Darth Maul" class="btn"><img
+                        src="https://starwars-visualguide.com/assets/img/characters/44.jpg" class="card-img-top"
+                        alt="Skyscrapers" /></a>
+                <div class="card-body bg-dark">
+                    <h5 class="card-title text-warning">Personaje</h5>
+                    <hr style="color: white;">
+                    <p class="card-text text-white">
+                        ${personaje.birth_year}
+                        <br>
+                        ${personaje.gender}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal">
+            <div id="modalContent">
+                <a href="#cerrar">X</a>
+                <div class="container">
+                    <div id="card"
+                        style="background: radial-gradient(circle at 50% 0%, rgb(167, 255, 5) 36%, rgb(255, 255, 255) 36%);">
+                        <p class="hp">
+                            <span>HP</span>
+                            95
+                        </p>
+                        <img
+                            src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/6420b-pikachu-sentado-png.png?resize=800%2C800&amp;ssl=1">
+                        <h2 class="poke-name">Pikachu</h2>
+                        <div class="types">
+                            <span style="background-color: rgb(205, 253, 61);">Electrico</span>
+                        </div>
+                        <div class="stats">
+                            <div>
+                                <h3>70</h3>
+                                <p>Attack</p>
+                            </div>
+                            <div>
+                                <h3>73</h3>
+                                <p>Defense</p>
+                            </div>
+                            <div>
+                                <h3>60</h3>
+                                <p>Speed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script text="text/javascript" src="index.js"></script>
+
+</body>
+
+</html>
