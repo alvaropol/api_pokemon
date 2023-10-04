@@ -44,21 +44,29 @@
 
         <div class="row row-cols-lg-5" id="lista-nomItems" itemid="1"></div>
 
-        <div class="modal fade show" id="modal-item-datails" tabindex="-1" aria-modal="true" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                        <h5 class="modal-title" id="modal-itemnom"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="modal-body">
-                        <!--primero ira la foto del item
-                            luego pondremos la categoria del item 
-                          luego una pequeña descripcion del item-->
-                        <p></p>
-    
+        <div id="modal-item-details" tabindex="-1" aria-labelledby="item_detail_modal_label" aria-hidden="true"
+        class="modal fade">
+        <div class="modal-dialog">
+            <div class="container">
+                <div id="card">
+                    <p class="hp">
+                        <span>HP</span>
+                        <span id="hp_pokemon"></span>
+                    </p>
+                    <img id="modal-bodyImg" src="#">
+                    <h2 class="poke-name" id="modal-bodyName"></h2>
+                    <div class="types">
+                        <span id="modal-bodyCategory" style="color: black;"></span>
+                    </div>
+                    <div class="description">
+                        <div>
+                            <p id="modal-bodyEffect"></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
       
 

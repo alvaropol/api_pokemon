@@ -11,10 +11,10 @@ $(document).ready(function(){
                 type: 'GET'
             }).done(function(items){
                 var template= `
-                <div class="cardItem" itemId="${items.name}" style="width: 15%;">
-                <img class="card-img-top" src="${items.sprites.default}" alt="Foto de Item">
+                <div class="cardItem" itemId="${items.name}" style="width: 15%; text-align: center;">
+                <img class="card-img-top" src="${items.sprites.default}" alt="Foto de Item" style="width: 50%;">
                     <div class="card-body">
-                        <p class="card-text" style="text-align: center;">${items.name}</p>
+                        <p class="card-text">${items.name}</p>
                     </div>
                 </div>`
                 $('#lista-nomItems').append(template);
@@ -34,7 +34,12 @@ $(document).ready(function(){
                 type: 'GET'
             }).done(function(itemsM){
                 var templateM= `
+                <img class="modal-img" src="${itemsM.sprites.default}" alt="Foto de item modal" style="text-align: left;">
+                <h3 class="modal-title" style="text-align: rigth;">${itemsM.name}</h3>
+                <p class="modal-categoria" style="text-align: rigth;">${itemsM.category.name}</p>
+                <p class="modal-uso" style="text-align:rigth;">${itemsM.effect_entries[0].effect}</p>
                 `
+                $('#modal-bodyItems').append(templateM);
             })
         });
 
@@ -47,9 +52,14 @@ $(document).ready(function(){
             type: 'GET' 
 
         }).done(function (resp) {
-            $('#modal-itemnom').html(resp.name);
+            $('#modal-bodyImg').attr("src", resp.sprites.default);
+            $('#modal-bodyName').html(resp.name);
+            $('#modal-bodyCategory').html(resp.category.name);
+            $('#modal-bodyEffect').html(resp.effect_entries[0].effect);
 
-            $('#modal-item-datails').show();
+
+
+            $('#modal-item-details').show();
         });
     });
 });
