@@ -23,6 +23,22 @@ $(document).ready(function(){
 
         });
     });
+    $.ajax({
+        url: 'https://pokeapi.co/api/v2/move/?limit=700',
+        type: 'GET'
+    }).done(function (resp){
+        var listaItemsM= resp.results;
+        listaItemsM.forEach(itemM =>{
+            $.ajax({
+                url: itemM.url, 
+                type: 'GET'
+            }).done(function(itemsM){
+                var templateM= `
+                `
+            })
+        });
+
+    })
     $(document).on('click', '.cardItem', function () {
         var itemId = $(this).attr('itemId');
 
@@ -35,5 +51,5 @@ $(document).ready(function(){
 
             $('#modal-item-datails').show();
         });
-    })
+    });
 });
