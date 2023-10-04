@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Items</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
 
 </head>
+
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark">
         <div class="container-fluid">
@@ -20,7 +24,8 @@
                     <a class="nav-link" href="PaginaEspecies.html" style="color: white;">Especies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="PaginaItems.html" style="color: white; text-decoration: underline;">Items</a>
+                    <a class="nav-link" href="PaginaItems.html"
+                        style="color: white; text-decoration: underline;">Items</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="pokemon.html" style="color: white;">Pokemón</a>
@@ -42,33 +47,42 @@
     </nav>
 
 
-        <div class="row row-cols-lg-5" id="lista-nomItems" itemid="1"></div>
+    <div class="row row-cols-lg-5" id="lista-nomItems" itemid="1"></div>
 
-        <div class="modal fade show" id="modal-item-datails" tabindex="-1" aria-modal="true" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                        <h5 class="modal-title" id="modal-itemnom"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="modal-body">
-                        <!--primero ira la foto del item
-                            luego pondremos la categoria del item 
-                          luego una pequeña descripcion del item-->
-                        <p></p>
-    
+    <div id="modal-item-details" tabindex="-1" aria-labelledby="item_detail_modal_label" aria-hidden="true"
+        class="modal fade">
+        <div class="modal-dialog">
+            <div class="container">
+                <div id="card">
+                    <p class="hp">
+                        <span>HP</span>
+                        <span id="hp_pokemon"></span>
+                    </p>
+                    <img id="modal-bodyImg" src="#">
+                    <h2 class="poke-name" id="modal-bodyName"></h2>
+                    <div class="types">
+                        <span id="modal-bodyCategory" style="color: black;"></span>
+                    </div>
+                    <div class="description">
+                        <div>
+                            <p id="modal-bodyEffect"></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-      
+
 
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-<script text="text/javascript" src="../js/js.js"></script>
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script text="text/javascript" src="../js/js.js"></script>
 </body>
+
 </html>
