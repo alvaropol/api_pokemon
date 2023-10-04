@@ -87,12 +87,22 @@ h4 {
 }
 
 .hp {
-    width: 80px;
+    width: 100px;
     background-color: #ffffff;
     text-align: center;
     padding: 8px 0;
     border-radius: 30px;
     margin-left: auto;
+    font-weight: 400;
+}
+
+.numPokedex {
+    width: 80px;
+    background-color: #ffffff;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 30px;
+    margin-right: auto;
     font-weight: 400;
 }
 
