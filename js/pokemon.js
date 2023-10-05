@@ -1,45 +1,29 @@
 $(document).ready(function () {
 
     function asignarColor(tipos) {
-        if (tipos.includes("grass")) {
-            return "7ED876";
-        } else if (tipos.includes("water")) {
-            return "6EA1FF";
-        } else if (tipos.includes("fire")) {
-            return "d17921"
-        } else if (tipos.includes("electric")) {
-            return "DFDF59"
-        } else if (tipos.includes("normal")) {
-            return "939e93"
-        } else if (tipos.includes("flying")) {
-            return "60c3d6"
-        } else if (tipos.includes("bug")) {
-            return "1e8200"
-        } else if (tipos.includes("ground")) {
-            return "855113"
-        } else if (tipos.includes("poison")) {
-            return "944b8d"
-        } else if (tipos.includes("fairy")) {
-            return "d4a1cf"
-        } else if (tipos.includes("fighting")) {
-            return "ff3d3d"
-        } else if (tipos.includes("psychic")) {
-            return "ab007d"
-        } else if (tipos.includes("rock")) {
-            return "c49e78"
-        } else if (tipos.includes("ice")) {
-            return "b5ebe5"
-        } else if (tipos.includes("dragon")) {
-            return "2643ff"
-        } else if (tipos.includes("ghost")) {
-            return "5a6294"
-        } else if (tipos.includes("dark")) {
-            return "605975"
-        } else if (tipos.includes("steel")) {
-            return "7286b0"
-        } else {
-            return "FFFFFF";
-        }
+
+        var tipoColor = {
+            "grass": "7ED876",
+            "water": "6EA1FF",
+            "fire": "d17921",
+            "electric": "DFDF59",
+            "normal": "939e93",
+            "flying": "60c3d6",
+            "bug": "1e8200",
+            "ground": "855113",
+            "poison": "944b8d",
+            "fairy": "d4a1cf",
+            "fighting": "ff3d3d",
+            "psychic": "ab007d",
+            "rock": "c49e78",
+            "ice": "b5ebe5",
+            "dragon": "2643ff",
+            "ghost": "5a6294",
+            "dark": "605975",
+            "steel": "7286b0"
+        };
+
+        return tipoColor[tipos[0]];
     }
 
     $.ajax({
