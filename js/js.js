@@ -1,16 +1,25 @@
-$(document).ready(function(){
-
+$(document).ready(function () {
+    var numItems;
+    var pag;
+    var numItemPag=20;
     $.ajax({
-        url: 'https://pokeapi.co/api/v2/item/?limit=700',
+        url: 'https://pokeapi.co/api/v2/item/',
         type: 'GET'
     }).done(function (resp) {
+        numItems = resp.count;
+        pag= (numItems/numItemPag).trunc()+1;
+        for (var i = 0; i < pag; i++) {
+            var template= ` <li class="page-item">${i}</li>`
+            $('#paginas').append(template);
+        };
         var listaItems = resp.results;
+
         listaItems.forEach(item => {
             $.ajax({
                 url: item.url,
                 type: 'GET'
-            }).done(function(items){
-                var template= `
+            }).done(function (items) {
+                var template = `
                 <div class="cardItem" itemId="${items.name}" style="width: 15%; text-align: center;">
                 <img class="card-img-top" src="${items.sprites.default}" alt="Foto de Item" style="width: 50%;">
                     <div class="card-body">
@@ -26,14 +35,14 @@ $(document).ready(function(){
     $.ajax({
         url: 'https://pokeapi.co/api/v2/move/?limit=700',
         type: 'GET'
-    }).done(function (resp){
-        var listaItemsM= resp.results;
-        listaItemsM.forEach(itemM =>{
+    }).done(function (resp) {
+        var listaItemsM = resp.results;
+        listaItemsM.forEach(itemM => {
             $.ajax({
-                url: itemM.url, 
+                url: itemM.url,
                 type: 'GET'
-            }).done(function(itemsM){
-                var templateM= `
+            }).done(function (itemsM) {
+                var templateM = `
                 <img class="modal-img" src="${itemsM.sprites.default}" alt="Foto de item modal" style="text-align: left;">
                 <h3 class="modal-title" style="text-align: rigth;">${itemsM.name}</h3>
                 <p class="modal-categoria" style="text-align: rigth;">${itemsM.category.name}</p>
@@ -49,7 +58,7 @@ $(document).ready(function(){
 
         $.ajax({
             url: 'https://pokeapi.co/api/v2/item/' + itemId,
-            type: 'GET' 
+            type: 'GET'
 
         }).done(function (resp) {
             $('#modal-bodyImg').attr("src", resp.sprites.default);
