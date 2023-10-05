@@ -146,6 +146,8 @@ $(document).ready(function () {
 
             $('#pokemon_detail_modal').modal('show');
         });
+
+
     });
 });
 

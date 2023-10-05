@@ -38,15 +38,24 @@
                     </a>
                 </div>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="text" placeholder="Search pokemon">
-                    <button class="btn btn-warning" style="border-radius: 10px; color:#5252A0;" type="button"><i
-                            class="bi bi-search"></i></button>
+                    <input id="searchInput" class="form-control me-2" type="text" placeholder="Search pokemon">
+                    <button id="searchButton" class="btn btn-warning" style="border-radius: 10px; color:#5252A0;"
+                        type="button"><i class="bi bi-search"></i></button>
                 </form>
             </div>
         </nav>
     </header>
 
     <main>
+        <ul class="pagination" style="margin-left: 40px;
+        margin-top: 30px;
+        margin-bottom: -80px;">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
         <div class="row row-cols-1 row-cols-md-6 g-4" id="listaPokemon" style="padding: 100px" ;>
         </div>
     </main>
