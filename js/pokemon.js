@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var currentPage = 1;
+    var totalPages = 0;
 
     function asignarColor(tipos) {
 
@@ -32,25 +33,49 @@ $(document).ready(function () {
 
         $('#pagination').empty();
 
-        for (var i = 1; i <= totalPages; i++) {
-            var template = $('<li class="page-item"><a class="page-link" data-page="' + i + '">' + i + '</a></li>');
+        var startPage = Math.max(currentPage - 2, 1);
+        var endPage = Math.min(startPage + 4, totalPages);
+
+        if (startPage > 1) {
+            var prev = $('<li class="page-item"><a class="btn" data-page="' + (startPage - 1) + '"><</a></li>');
+            $('#pagination').append(prev);
+        }
+
+        for (var i = startPage; i <= endPage; i++) {
+            var template = $('<li class="page-item"><a class="btn" data-page="' + i + '">' + i + '</a></li>');
             $('#pagination').append(template);
         }
 
-        $('#pagination').on('click', 'a.page-link', function () {
-            currentPage = $(this).data('page');
-            loadPokemonList(currentPage);
-        });
-    }
+        if (endPage < totalPages) {
+            var next = $('<li class="page-item"><a class="btn" data-page="' + (endPage + 1) + '">></a></li>');
 
-    //-----------------------------------------------------------------------------------------------------------------------------------
+            $('#pagination').append(next);
+        }
+
+    }
 
     $.ajax({
         type: "GET",
         url: "https://pokeapi.co/api/v2/pokemon?limit=20",
     }).done(function (resp) {
         generatePaginator(resp.count / 20);
-        loadPokemonList(currentPage);
+
+        loadPokemonList(currentPage); //Primero enseñamos la página 1 (currentPage=1)
+
+        $('#pagination').on('click', 'a.btn', function () {
+
+            var clickedPage = $(this).data('page');
+
+            if (clickedPage === 'prev' && currentPage > 1) {
+                currentPage = Math.max(currentPage - 1, 1);
+            } else if (clickedPage === 'next' && currentPage < totalPages) {
+                currentPage = Math.min(currentPage + 1, totalPages);
+            } else {
+                currentPage = clickedPage;
+            }
+
+            loadPokemonList(currentPage);
+        });
     });
 
     function loadPokemonList(page) {
@@ -166,9 +191,7 @@ $(document).ready(function () {
 
             generatePaginator(resp.count / 20);
         });
-    }
-
-
+    };
 });
 
 
