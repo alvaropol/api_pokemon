@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    var currentPage = 1;
+    var totalPages = 0;
+    var campoBuscar = $('#campoBuscar');
 
     function asignarColor(tipos) {
 
@@ -24,115 +27,203 @@ $(document).ready(function () {
         };
 
         return tipoColor[tipos[0]];
+
+    }
+
+    function generatePaginator(totalPages) {
+
+        $('#pagination').empty();
+
+        var startPage = Math.max(currentPage - 2, 1);
+        var endPage = Math.min(startPage + 4, totalPages);
+
+        if (startPage > 1) {
+            var prev = $('<li class="page-item"><a class="btn" data-page="' + (startPage - 1) + '"><</a></li>');
+            $('#pagination').append(prev);
+        }
+
+        for (var i = startPage; i <= endPage; i++) {
+            var template = $('<li class="page-item"><a class="btn" data-page="' + i + '">' + i + '</a></li>');
+            $('#pagination').append(template);
+        }
+
+        if (endPage < totalPages) {
+            var next = $('<li class="page-item"><a class="btn" data-page="' + (endPage + 1) + '">></a></li>');
+
+            $('#pagination').append(next);
+        }
+
     }
 
     $.ajax({
         type: "GET",
-        url: "https://pokeapi.co/api/v2/pokemon?limit=900/",
+        url: "https://pokeapi.co/api/v2/pokemon?limit=20",
     }).done(function (resp) {
-        var listaPokemon = resp.results;
-        listaPokemon.forEach(pokemon => {
+        generatePaginator(resp.count / 20);
 
-            $.ajax({
-                type: "GET",
-                url: pokemon.url
-            }).done(function (pokemonResponse) {
+        loadPokemonList(currentPage); //Primero enseñamos la página 1 (currentPage=1)
 
-                var tipos = pokemonResponse.types.map(type => type.type.name);
+        $('#pagination').on('click', 'a.btn', function () {
 
-                var color = asignarColor(tipos);
+            var clickedPage = $(this).data('page');
 
-                var template = `
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3" id="unidadPokemon">
-                        <a class="btn" type="button" id="tarjetaPokemon" data-id="${pokemonResponse.id}" style="border-radius: 20px; background-color: #${color};">
-                            <h2 style="padding: 20px; font-size: 15px;">${pokemonResponse.id} - ${pokemon.name.toUpperCase()}</h2><img style="padding: 20px;"
-                                src="https://img.pokemondb.net/sprites/home/normal/${pokemon.name}.png"
-                                class="card-img-top"/>
-                        </a>
-                    </div>
-                `;
+            if (clickedPage === 'prev' && currentPage > 1) {
+                currentPage = Math.max(currentPage - 1, 1);
+            } else if (clickedPage === 'next' && currentPage < totalPages) {
+                currentPage = Math.min(currentPage + 1, totalPages);
+            } else {
+                currentPage = clickedPage;
+            }
 
-                $('#listaPokemon').append(template);
-
-
-            });
+            loadPokemonList(currentPage);
         });
     });
 
-    $(document).on('click', '#unidadPokemon', function () {
-
-        var pokemonId = $(this).find('#tarjetaPokemon').data('id');
-
+    function loadPokemonList(page) {
         $.ajax({
             type: "GET",
-            url: `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`,
-        }).done(function (pokemonDetails) {
+            url: `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${(page - 1) * 20}`,
+        }).done(function (resp) {
 
-            var pokemonHp, pokemonAttack, pokemonDefense, pokemonSpeed;
+            var listaPokemon = resp.results;
+            $('#listaPokemon').empty();
 
-            var tipos = pokemonDetails.types.map(type => type.type.name);
+            listaPokemon.forEach(pokemon => {
 
-            var color1 = asignarColor(tipos);
+                $.ajax({
+                    type: "GET",
+                    url: pokemon.url
+                }).done(function (pokemonResponse) {
+
+                    var tipos = pokemonResponse.types.map(type => type.type.name);
+
+                    var color = asignarColor(tipos);
+
+                    var template = `
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-3 unidadPokemon" id="unidadPokemon">
+                            <a class="btn" type="button" id="tarjetaPokemon" data-id="${pokemonResponse.id}" style="border-radius: 20px; background-color: #${color};">
+                                <h2 class="nombrePokemon" id="nombrePokemon" style="padding: 20px; font-size: 15px;">${pokemonResponse.id} - ${pokemon.name.toUpperCase()}</h2><img style="padding: 20px;"
+                                    src="https://img.pokemondb.net/sprites/home/normal/${pokemon.name}.png"
+                                    class="card-img-top"/>
+                            </a>
+                        </div>
+                    `;
+
+                    $('#listaPokemon').append(template);
 
 
-            for (var i = 0; i < pokemonDetails.stats.length; i++) {
-                //Como stats es un array de características busco el que sea hp para buscar la vida del pokemon
-                if (pokemonDetails.stats[i].stat.name === "hp") {
+                });
+            });
 
-                    pokemonHp = pokemonDetails.stats[i].base_stat;
 
-                }
+
+            $('#searchButton').on('click', function () {
+                var pokemonName = campoBuscar.val().toLowerCase();
+                filterPokemonByName(pokemonName);
+            });
+
+            $('#campoBuscar').on('keypress', function () {
+
+                var pokemonName = campoBuscar.val().toLowerCase();
+                filterPokemonByName(pokemonName);
+
+            });
+
+            function filterPokemonByName(name) {
+                var allPokemonCards = $('.unidadPokemon');
+
+                allPokemonCards.each(function () {
+                    var cardName = $(this).find('.nombrePokemon').text().toLowerCase();
+                    if (cardName.includes(name)) {
+
+                        $(this).show();
+                    } else {
+
+                        $(this).hide();
+                    }
+                });
             }
 
-            for (var i = 0; i < pokemonDetails.stats.length; i++) {
-                var stat = pokemonDetails.stats[i].stat;
 
-                if (stat.name === "attack") {
+            $(document).on('click', '#unidadPokemon', function () {
 
-                    pokemonAttack = pokemonDetails.stats[i].base_stat;
-                } else if (stat.name === "defense") {
+                var pokemonId = $(this).find('#tarjetaPokemon').data('id');
 
-                    pokemonDefense = pokemonDetails.stats[i].base_stat;
-                } else if (stat.name === "speed") {
-                    pokemonSpeed = pokemonDetails.stats[i].base_stat;
-                }
+                $.ajax({
+                    type: "GET",
+                    url: `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`,
+                }).done(function (pokemonDetails) {
 
-                if (pokemonAttack !== undefined && pokemonDefense !== undefined && pokemonSpeed !== undefined) {
-                    break;
-                }
-            }
+                    var pokemonHp, pokemonAttack, pokemonDefense, pokemonSpeed;
 
-            if (pokemonId >= 0 && pokemonId < 10) {
-                $('#pokemon_name').html(`00${pokemonId}<br> - <br>${pokemonDetails.name.toUpperCase()}`);
-            } else if (pokemonId >= 10 && pokemonId < 100) {
-                $('#pokemon_name').html(`0${pokemonId}<br> - <br>${pokemonDetails.name.toUpperCase()}`);
-            } else {
-                $('#pokemon_name').html(`${pokemonId}<br> - <br>${pokemonDetails.name.toUpperCase()}`);
-            }
+                    var tipo = pokemonDetails.types.map(type => type.type.name);
+
+                    var color1 = asignarColor(tipo);
 
 
-            $('#attack_stat').text(pokemonAttack);
-            $('#defense_stat').text(pokemonDefense);
-            $('#speed_stat').text(pokemonSpeed);
-            $('#height').text(pokemonDetails.height / 10 + "m");
-            $('#weight').text(pokemonDetails.weight / 100 + "kg");
-            $('#base_experience').text(pokemonDetails.base_experience);
-            $('#abilities').text(pokemonDetails.abilities[0].ability.name);
-            $("#imagePokemon").attr("src", `https://img.pokemondb.net/sprites/home/normal/${pokemonDetails.name}.png`);
-            $('#hp_pokemon').text(pokemonHp);
-            $('#specie_name').css('background-color', `#${color1}`);
-            $('#specie_name').text(tipos);
+                    for (var i = 0; i < pokemonDetails.stats.length; i++) {
+                        //Como stats es un array de características busco el que sea hp para buscar la vida del pokemon
+                        if (pokemonDetails.stats[i].stat.name === "hp") {
+
+                            pokemonHp = pokemonDetails.stats[i].base_stat;
+
+                        }
+                    }
+
+                    for (var i = 0; i < pokemonDetails.stats.length; i++) {
+                        var stat = pokemonDetails.stats[i].stat;
+
+                        if (stat.name === "attack") {
+
+                            pokemonAttack = pokemonDetails.stats[i].base_stat;
+                        } else if (stat.name === "defense") {
+
+                            pokemonDefense = pokemonDetails.stats[i].base_stat;
+                        } else if (stat.name === "speed") {
+                            pokemonSpeed = pokemonDetails.stats[i].base_stat;
+                        }
+
+                        if (pokemonAttack !== undefined && pokemonDefense !== undefined && pokemonSpeed !== undefined) {
+                            break;
+                        }
+                    }
+
+                    if (pokemonId >= 0 && pokemonId < 10) {
+                        $('#pokemon_name').html(`00${pokemonId}<br> - <br>${pokemonDetails.name.toUpperCase()}`);
+                    } else if (pokemonId >= 10 && pokemonId < 100) {
+                        $('#pokemon_name').html(`0${pokemonId}<br> - <br>${pokemonDetails.name.toUpperCase()}`);
+                    } else {
+                        $('#pokemon_name').html(`${pokemonId}<br> - <br>${pokemonDetails.name.toUpperCase()}`);
+                    }
 
 
-            $('#card').css('background', `radial-gradient(circle at 50% 0%, #${color1} 39%, rgb(255, 255, 255) 36%)`)
+                    $('#attack_stat').text(pokemonAttack);
+                    $('#defense_stat').text(pokemonDefense);
+                    $('#speed_stat').text(pokemonSpeed);
+                    $('#height').text(pokemonDetails.height / 10 + "m");
+                    $('#weight').text(pokemonDetails.weight / 100 + "kg");
+                    $('#base_experience').text(pokemonDetails.base_experience);
+                    $('#abilities').text(pokemonDetails.abilities[0].ability.name);
+                    $("#imagePokemon").attr("src", `https://img.pokemondb.net/sprites/home/normal/${pokemonDetails.name}.png`);
+                    $('#hp_pokemon').text(pokemonHp);
+                    $('#specie_name').css('background-color', `#${color1}`);
+                    $('#specie_name').text(tipo);
+
+
+                    $('#card').css('background', `radial-gradient(circle at 50% 0%, #${color1} 39%, rgb(255, 255, 255) 36%)`)
 
 
 
-            $('#pokemon_detail_modal').modal('show');
+                    $('#pokemon_detail_modal').modal('show');
+                });
+            });
+
+
+            generatePaginator(resp.count / 20);
         });
 
+    }
 
-    });
 });
 
 
