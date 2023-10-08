@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #5E5EDD;
+    background-color: #5252A0;
 }
 
 * {
@@ -37,11 +37,13 @@ nav {
     margin-left: auto;
 
 }
+
 .pagination {
     margin-left: 40%;
     margin-top: 30px;
     margin-bottom: -80px;
 }
+
 .btn {
     position: relative;
     font-size: 1.2em;

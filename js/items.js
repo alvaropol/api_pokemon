@@ -59,7 +59,7 @@ $(document).ready(function () {
                     <div class="cardItem" id="cardItem" itemId="${ItemResponse.name}" style="width: 15%; text-align: center;">
                         <img class="card-img-top" src="${ItemResponse.sprites.default}" alt="Foto de Item" style="width: 50%;">
                         <div class="card-body">
-                            <p class="card-text">${ItemResponse.name}</p>
+                            <p class="card-text">${ItemResponse.name.toUpperCase()}</p>
                         </div>
                     </div>`;
                     $('#lista-nomItems').append(template);
@@ -102,9 +102,9 @@ $(document).ready(function () {
             type: 'GET'
         }).done(function (resp) {
             $('#modal-bodyImg').attr("src", resp.sprites.default);
-            $('#modal-bodyName').html(resp.name);
-            $('#modal-bodyCategory').html(resp.category.name);
-            $('#modal-bodyEffect').html(resp.effect_entries[0].effect);
+            $('#modal-bodyName').html(resp.name.toUpperCase());
+            $('#modal-bodyCategory').html("CATEGORY: " + resp.category.name.toUpperCase());
+            $('#modal-bodyEffect').html(resp.effect_entries[0].effect.toUpperCase());
             $('#modal-item-details').modal('show');
         });
     });
