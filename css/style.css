@@ -32,14 +32,24 @@ nav {
 #lista-nomItems {
     background-color: #5252A0;
     color: white;
-    padding: 4%;
+    padding: 8%;
     margin-right: auto;
     margin-left: auto;
+
 }
-
-.modal-content {
-    background-color: black;
-    color: black;
-    border-radius: 40px;
-
+.pagination {
+    margin-left: 40%;
+    margin-top: 30px;
+    margin-bottom: -80px;
+}
+.btn {
+    position: relative;
+    font-size: 1.2em;
+    font-weight: 300;
+    color: #fff;
+    text-shadow: none;
+    border-radius: 0px;
+    background: rgb(205, 205, 66);
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.22);
+    text-decoration: none;
 }
